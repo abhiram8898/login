@@ -1,0 +1,96 @@
+$(document).ready(() => {
+
+    // Register page
+
+    $(".squs").change(() => {
+        $(".sans").removeAttr('disabled');
+    })
+
+
+    //Password Reset
+
+    $("#email-exist").keyup(() => {
+
+        let email_test = $('#email-exist').val();
+        console.log(email_test)
+        $.ajax({
+            url: 'password-reset.php',
+            method: "POST",
+            data: { email: email_test },
+            dataType: 'json',
+            success: function(data) {
+                if (data) {
+
+                    console.log(data);
+                    $('#email-test').html('<i class="fas fa-check-circle"></i>');
+                    $('#squestion').html(data.squestion);
+                    $('#sanswer').removeAttr('disabled');
+
+                } else {
+                    $('#email-test').html('<i class="fas fa-times-circle text-danger"></i>');
+                }
+            },
+        });
+    })
+
+
+    $('#sanswer').keyup(() => {
+
+        let email_test = $('#email-exist').val();
+        let sanswer = $('#sanswer').val();
+
+        $.ajax({
+            url: 'password-reset.php',
+            method: "POST",
+            data: { sanswer: sanswer, email_test: email_test },
+            dataType: 'json',
+            success: function(data) {
+                if (data) {
+                    $('#stest').html('<i class="fas fa-check-circle"></i>');
+                    $('#password1').attr("type", "password");
+                    $('#password2').attr("type", "password");
+                    $('#reset-fa1').removeClass('d-none');
+                    $('#reset-fa2').removeClass('d-none');
+                    $('#pass-reset').removeAttr('disabled');
+                } else {
+                    $('#stest').html('<i class="fas fa-times-circle text-danger"></i>');
+                }
+            }
+        })
+    })
+
+    $('#pass-reset').click((e) => {
+        e.preventDefault();
+        let email = $('#email-exist').val();
+        let password1 = $('#password1').val();
+        let password2 = $('#password2').val();
+
+        if (password1 == password2) {
+
+            $.ajax({
+                url: 'password-reset.php',
+                method: "POST",
+                data: { email: email, password1: password1 },
+                dataType: 'json',
+                success: function(data) {
+                    swal("Password Reset!", "Now you can login with new password", "success").then(() => {
+                        location.replace("index.php")
+                    })
+                },
+                error: function(data) {
+                    alert("Failure")
+                }
+            })
+
+        } else {
+            $('#pwd-match').html("Password not match")
+        }
+
+
+    })
+
+
+
+
+
+})

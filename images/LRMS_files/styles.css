@@ -1,0 +1,55 @@
+/*
+Author : Vijith
+Date : 26/01/2022
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f0f0f0;
+}
+
+h2 {
+    text-align: center;
+    font-size: 50px;
+    font-family: 'Mochiy Pop P One', sans-serif;
+}
+
+.profile h3 {
+    text-align: center;
+    font-size: 50px;
+    font-family: 'Mochiy Pop P One', sans-serif;
+}
+
+.login-page {
+    height: 100vh;
+}
+
+.img-container {
+    height: 350px;
+    width: 250px;
+    text-align: center;
+}
+
+.img-container img {
+    border-radius: 25px;
+}
+
+@media screen and (max-width:576px) {
+    .login-page {
+        height: auto;
+    }
+    .img-container {
+        height: auto;
+        width: auto;
+        text-align: center;
+    }
+    .profile h3 {
+        font-size: 25px;
+    }
+}
